@@ -6,17 +6,17 @@ void Grammar::addTerminal(TokenType tokenType) { _terminals.push_back(tokenType)
 
 std::vector<TokenType> Grammar::terminals() const { return _terminals; }
 
-bool checkSpecificCharacter(std::ifstream& stream, char character)
+bool checkSpecificCharacter(std::istream& stream, char character)
 {
     return static_cast<char>(stream.peek()) == character;
 }
 
-bool checkIdentifier(std::ifstream& stream)
+bool checkIdentifier(std::istream& stream)
 {
     return std::isalpha(stream.peek());
 }
 
-bool checkKeyword(std::ifstream& stream, std::string keyword)
+bool checkKeyword(std::istream& stream, std::string keyword)
 {
     if (!checkIdentifier(stream)) return false;
 
@@ -41,7 +41,7 @@ bool checkKeyword(std::ifstream& stream, std::string keyword)
     return found;
 }
 
-bool checkSequence(std::ifstream& stream, std::string sequence)
+bool checkSequence(std::istream& stream, std::string sequence)
 {
     bool found = false;
     auto position = stream.tellg();
@@ -63,12 +63,12 @@ bool checkSequence(std::ifstream& stream, std::string sequence)
     return found;
 }
 
-std::string getSingleCharacterAsString(std::ifstream& stream)
+std::string getSingleCharacterAsString(std::istream& stream)
 {
     return std::string{ static_cast<char>(stream.get()) };
 }
 
-std::string getIdentifier(std::ifstream& stream)
+std::string getIdentifier(std::istream& stream)
 {
     std::string result;
 
@@ -84,13 +84,13 @@ std::string getIdentifier(std::ifstream& stream)
     return result;
 }
 
-std::string getSequence(std::ifstream& stream, std::string sequence)
+std::string getSequence(std::istream& stream, std::string sequence)
 {
     stream.ignore(sequence.size());
     return sequence;
 }
 
-std::string getLineComment(std::ifstream& stream)
+std::string getLineComment(std::istream& stream)
 {
     std::string result;
     std::getline(stream, result);
@@ -106,7 +106,7 @@ void appendThrough(std::istream& stream, std::string& value, char delim = '\n')
     value += append;
 }
 
-std::string getBlockComment(std::ifstream& stream)
+std::string getBlockComment(std::istream& stream)
 {
     std::string result;
     result.push_back(static_cast<char>(stream.get()));
@@ -123,7 +123,7 @@ std::string getBlockComment(std::ifstream& stream)
     return result;
 }
 
-std::string getString(std::ifstream& stream)
+std::string getString(std::istream& stream)
 {
     std::string result;
     result.push_back(static_cast<char>(stream.get()));

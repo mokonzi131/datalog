@@ -8,7 +8,7 @@ class Lexer
 {
 public:
     Lexer(std::vector<TokenType> types);
-    std::vector<Token> process(std::ifstream& data);
+    std::vector<Token> process(std::istream& data);
 
 private:
     std::vector<TokenType> _types;

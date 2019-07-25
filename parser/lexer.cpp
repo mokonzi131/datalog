@@ -10,7 +10,7 @@ Lexer::Lexer(std::vector<TokenType> types)
     _types.push_back(TokenType::Undefined);
 }
 
-std::vector<Token> Lexer::process(std::ifstream& data)
+std::vector<Token> Lexer::process(std::istream& data)
 {
     std::vector<Token> tokens;
 

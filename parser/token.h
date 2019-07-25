@@ -1,6 +1,6 @@
 #pragma once
 
-#include <fstream>
+#include <istream>
 #include <string>
 #include <functional>
 
@@ -13,17 +13,17 @@ public:
 
     TokenType(
         std::string name,
-        std::function<bool(std::ifstream&)> matcher,
-        std::function<std::string(std::ifstream&)> extractor);
+        std::function<bool(std::istream&)> matcher,
+        std::function<std::string(std::istream&)> extractor);
 
     std::string name() const;
-    bool matchesNext(std::ifstream& data) const;
-    std::string extractNext(std::ifstream& data) const;
+    bool matchesNext(std::istream& data) const;
+    std::string extractNext(std::istream& data) const;
 
 private:
     std::string _name;
-    std::function<bool(std::ifstream&)> _matcher;
-    std::function<std::string(std::ifstream&)> _extractor;
+    std::function<bool(std::istream&)> _matcher;
+    std::function<std::string(std::istream&)> _extractor;
 };
 
 class Token

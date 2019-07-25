@@ -3,20 +3,20 @@
 
 TokenType::TokenType(
     std::string name,
-    std::function<bool(std::ifstream&)> matcher,
-    std::function<std::string(std::ifstream&)> extractor)
+    std::function<bool(std::istream&)> matcher,
+    std::function<std::string(std::istream&)> extractor)
     : _name{ name }, _matcher{ matcher }, _extractor{ extractor } {}
 
 TokenType TokenType::Undefined{
     std::string{ "UNDEFINED" },
-    [](std::ifstream& stream) -> bool {
+    [](std::istream& stream) -> bool {
         auto value = stream.peek();
         if (value != std::char_traits<char>::eof())
             return true;
 
         return false;
     },
-    [](std::ifstream& stream) -> std::string {
+    [](std::istream& stream) -> std::string {
         int value = stream.get();
         if (!stream.eof())
             return std::string{ static_cast<char>(value) };
@@ -26,31 +26,31 @@ TokenType TokenType::Undefined{
 
 TokenType TokenType::EndOfFile{
     std::string{ "EOF" },
-    [](std::ifstream& stream) -> bool {
+    [](std::istream& stream) -> bool {
         auto value = stream.peek();
         if (value == std::char_traits<char>::eof())
             return true;
 
         return false;
     },
-    [](std::ifstream& stream) -> std::string {
+    [](std::istream& stream) -> std::string {
         return std::string{};
     } };
 
 TokenType TokenType::Whitespace{
     std::string{ "WHITESPACE" },
-    [](std::ifstream& stream) -> bool {
+    [](std::istream& stream) -> bool {
         return std::isspace(stream.peek());
     },
-    [](std::ifstream& stream) -> std::string {
+    [](std::istream& stream) -> std::string {
         return std::string{ static_cast<char>(stream.get()) };
     } };
 
 std::string TokenType::name() const { return _name; }
 
-bool TokenType::matchesNext(std::ifstream& data) const { return _matcher(data); }
+bool TokenType::matchesNext(std::istream& data) const { return _matcher(data); }
 
-std::string TokenType::extractNext(std::ifstream& data) const { return _extractor(data); }
+std::string TokenType::extractNext(std::istream& data) const { return _extractor(data); }
 
 
 Token::Token(TokenType type, std::string value, size_t line)

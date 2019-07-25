@@ -6,8 +6,8 @@
 #include <algorithm>
 #include <array>
 #include "util.h"
-#include "grammar.h"
-#include "parser.h"
+#include "parser/grammar.h"
+#include "parser/parser.h"
 namespace fs = std::filesystem;
 
 int main(int argc, char* argv[])

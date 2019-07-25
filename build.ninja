@@ -1,0 +1,18 @@
+ccflags = -Wall -g -std=c++17 -stdlib=libc++ -lc++fs
+
+rule cxx
+    command = clang++ $ccflags -o $out -c $in
+
+rule link
+    command = clang++ $ccflags -o $out $in
+
+build tmp/parser/token.o: cxx src/parser/token.cpp
+build tmp/parser/lexer.o: cxx src/parser/lexer.cpp
+build tmp/parser/grammar.o: cxx src/parser/grammar.cpp
+build tmp/parser/parser.o: cxx src/parser/parser.cpp
+build tmp/util.o: cxx src/util.cpp
+build tmp/main.o: cxx src/main.cpp
+
+build bin/datalog: link tmp/parser/token.o $
+    tmp/parser/lexer.o tmp/parser/grammar.o $
+    tmp/parser/parser.o tmp/util.o tmp/main.o

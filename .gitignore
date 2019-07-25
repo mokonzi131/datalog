@@ -1,2 +1,10 @@
+# Tooling
 .vscode/
+
+# Project Binaries
 bin/
+tmp/
+
+# Ninja Build System
+.ninja_deps
+.ninja_log

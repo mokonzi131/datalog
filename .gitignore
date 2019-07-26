@@ -2,8 +2,7 @@
 .vscode/
 
 # Project Binaries
-bin/
-tmp/
+build/
 
 # Ninja Build System
 .ninja_deps

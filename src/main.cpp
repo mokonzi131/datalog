@@ -40,24 +40,4 @@ int main(int argc, char* argv[])
         std::cout << token << "\n";
     }
     std::cout << "Total Tokens = " << filtered.size() << "\n";
-
-//    auto filename = args.at(1);
-
-    //auto grammar = DatalogGrammarFactory::createDatalogGrammar();
-    //LL1Parser parser{ grammar }; // checks grammar validity and if its LL1
-    //auto tokens = parser.process(filename);
-    
-//    DatalogProgram db; // -> parser.loadProgram(filename)
-//    db.load(parser, filename); // parser (lexes) and builds database structure
-//    db.evaluate(); // evaluates the queries against the database
-
-//    parser.loadProgram(filename);
-
-//    Datalog database{ parser };
-//    database.load(filename);
-
-//    grammer.addToken("COMMA", [](std::ifstream& data){
-//        if (data.peek() == ',') return std::tuple(true, std::string{","});
-//        else return std::tuple(false, std::string{});
-//    });
 }

@@ -6,15 +6,18 @@
 class Grammar
 {
 public:
+    Grammar(Variable startSymbol);
+
     void addTerminal(TokenType tokenType);
+    void addProduction(std::pair<Variable, std::vector<Variable>> production);
 
     std::vector<TokenType> terminals() const;
 
 private:
-    // _variables???
+    std::vector<Variable> _variables;
     std::vector<TokenType> _terminals;
-    // _start
-    // _productions
+    Variable _startSymbol;
+    std::vector<std::pair<Variable, std::vector<Variable>>> _productions;
 };
 
 class DatalogGrammarFactory

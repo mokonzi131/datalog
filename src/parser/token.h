@@ -4,7 +4,18 @@
 #include <string>
 #include <functional>
 
-class TokenType
+class Variable
+{
+public:
+    Variable(std::string name);
+
+    std::string name() const;
+
+private:
+    std::string _name;
+};
+
+class TokenType : public Variable
 {
 public:
     static TokenType Undefined;
@@ -16,12 +27,10 @@ public:
         std::function<bool(std::istream&)> matcher,
         std::function<std::string(std::istream&)> extractor);
 
-    std::string name() const;
     bool matchesNext(std::istream& data) const;
     std::string extractNext(std::istream& data) const;
 
 private:
-    std::string _name;
     std::function<bool(std::istream&)> _matcher;
     std::function<std::string(std::istream&)> _extractor;
 };

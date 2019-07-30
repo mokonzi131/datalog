@@ -1,11 +1,16 @@
 #include "token.h"
 #include <cctype>
 
+Variable::Variable(std::string name)
+    : _name{ name } {}
+
+std::string Variable::name() const { return _name; }
+
 TokenType::TokenType(
     std::string name,
     std::function<bool(std::istream&)> matcher,
     std::function<std::string(std::istream&)> extractor)
-    : _name{ name }, _matcher{ matcher }, _extractor{ extractor } {}
+    : Variable{ name }, _matcher{ matcher }, _extractor{ extractor } {}
 
 TokenType TokenType::Undefined{
     std::string{ "UNDEFINED" },
@@ -45,8 +50,6 @@ TokenType TokenType::Whitespace{
     [](std::istream& stream) -> std::string {
         return std::string{ static_cast<char>(stream.get()) };
     } };
-
-std::string TokenType::name() const { return _name; }
 
 bool TokenType::matchesNext(std::istream& data) const { return _matcher(data); }
 
